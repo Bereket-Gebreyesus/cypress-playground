@@ -47,22 +47,18 @@ describe("Categories", () => {
 
   it("Selecting a new category should deselect the old one", () => {
     cy.get('[data-testid="categories-list"]').within(() => {
-      // Step 1: Check that no category is selected
+      
       cy.get('[data-selected="true"]').should("not.exist");
   
-      // Step 2: Click a category
       cy.get('[data-elementid="electronics"]').click();
   
-      // Step 3: Check that that category is selected
       cy.get('[data-selected="true"]').should("have.length", 1);
   
-      // Step 4: Click a different category (with waiting for visibility)
       cy.get('[data-elementid="jewelery"]').should('be.visible').click();
   
-      // Ensure the DOM has settled after interaction
-      cy.wait(1000); // Adjust wait time as necessary
+      cy.wait(1000); 
   
-      // Step 5: Check that only the new category is selected
+      // Check that only the new category is selected
       cy.get('[data-selected="true"]').should("have.length", 1);
       cy.get('[data-selected="false"]').should("have.length", 3);
     });
